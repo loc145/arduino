@@ -8,7 +8,7 @@ SoftwareSerial espSerial(13, 15);  //(RX, TX);
 
 const char* ssid = "Samsung";
 const char* password = "77777777";
-int do_am, do_am_ed;
+int do_am;
 int timezone = 7 * 3600;
 int dst = 0;
 String updated_time;
@@ -42,14 +42,11 @@ void setup(){
   Serial.println("\nTime response....OK"); 
   
   Firebase.begin("loczing9c.firebaseio.com","olHKMSOaPG7ac2DHIneUt5d8CClPvoQxmzUlfpxv"); 
-  do_am = analogRead(vout);
   pinMode(LED_BUILTIN, OUTPUT);
 }
 void loop(){
-  while(do_am==do_am_ed){
-    do_am = analogRead(vout);
-    delay(1000);
-  }
+  
+  do_am = analogRead(vout);
   digitalWrite(LED_BUILTIN, LOW);
   delay(100);                    
   digitalWrite(LED_BUILTIN, HIGH);
@@ -97,6 +94,5 @@ void loop(){
 //  Firebase.getInt(dulieufirebase, "do_am");
 //  do_am = dulieufirebase.intData();
 //  delay(200);
-  do_am_ed = do_am;
-  delay(3000);
+  delay(10000);
 }
